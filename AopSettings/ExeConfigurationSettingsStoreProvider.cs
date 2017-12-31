@@ -7,22 +7,20 @@ namespace AopSettings
 {
     public class ExeConfigurationSettingsStoreProvider : ISettingsStoreProvider
     {
-        private readonly Configuration _configuration;
-        private readonly KeyValueConfigurationCollection _settings;
+        internal readonly AppSettingsSection ConfigurationSection;
 
         public ExeConfigurationSettingsStoreProvider(ConfigurationUserLevel userLevel, string sectionName)
         {
-            _configuration = ConfigurationManager.OpenExeConfiguration(userLevel);
-            var configurationSection = _configuration.Sections[sectionName] as AppSettingsSection;
-            if (configurationSection == null)
+            var configuration = ConfigurationManager.OpenExeConfiguration(userLevel);
+            ConfigurationSection = configuration.Sections[sectionName] as AppSettingsSection;
+            if (ConfigurationSection == null)
             {
-                configurationSection = new AppSettingsSection();
-                configurationSection.SectionInformation.AllowExeDefinition =
+                ConfigurationSection = new AppSettingsSection();
+                ConfigurationSection.SectionInformation.AllowExeDefinition =
                     ConfigurationAllowExeDefinition.MachineToLocalUser;
-                _configuration.Sections.Add(sectionName, configurationSection);
-                _configuration.Save();
+                configuration.Sections.Add(sectionName, ConfigurationSection);
+                configuration.Save();
             }
-            _settings = configurationSection.Settings;
         }
 
         public string GetSettingName(PropertyInfo property)
@@ -34,13 +32,14 @@ namespace AopSettings
         public bool Contains(string settingName)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(settingName));
-            return _settings.AllKeys.Contains(settingName);
+            return ConfigurationSection.Settings.AllKeys.Contains(settingName);
         }
 
         public object Read(string settingName)
         {
             Debug.Assert(!string.IsNullOrWhiteSpace(settingName));
-            return _settings[settingName]?.Value;
+            Debug.Assert(Contains(settingName));
+            return ConfigurationSection.Settings[settingName].Value;
         }
 
         public void Save(string settingName, object value)
@@ -49,13 +48,13 @@ namespace AopSettings
             var stringValue = value.ToString();
             if (Contains(settingName))
             {
-                _settings[settingName].Value = stringValue;
+                ConfigurationSection.Settings[settingName].Value = stringValue;
             }
             else
             {
-                _settings.Add(settingName, stringValue);
+                ConfigurationSection.Settings.Add(settingName, stringValue);
             }
-            _configuration.Save();
+            ConfigurationSection.CurrentConfiguration.Save();
         }
     }
 }
