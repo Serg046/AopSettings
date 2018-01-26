@@ -7,11 +7,6 @@ namespace AopSettings
     {
         private readonly ISettingsStore _settingsStore;
 
-        public SettingsInterceptor(ISettingsStoreProvider settingsStoreProvider)
-            : this(new SettingsStore(settingsStoreProvider))
-        {
-        }
-
         public SettingsInterceptor(ISettingsStore settingsStore)
         {
             _settingsStore = settingsStore;

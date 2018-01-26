@@ -6,21 +6,12 @@ namespace AopSettings
 {
     public class AopSettingsFactory
     {
-        public static T Create<T>(ISettingsStoreProvider settingsStoreProvider, params object[] args) where T : class
-            => Create<T>(new SettingsInterceptor(settingsStoreProvider), args);
-
         public static T Create<T>(ISettingsStore settingsStore, params object[] args) where T : class
-            => Create<T>(new SettingsInterceptor(settingsStore), args);
-
-        private static T Create<T>(SettingsInterceptor settingsInterceptor, params object[] args) where T : class
         {
             var type = typeof(T);
             Debug.Assert(Validate(type), "All injected properties must be public virtual read/write allowed");
-            return (T)new ProxyGenerator().CreateClassProxy(type, args, settingsInterceptor);
+            return (T)new ProxyGenerator().CreateClassProxy(type, args, new SettingsInterceptor(settingsStore));
         }
-
-        public static T Decorate<T>(ISettingsStoreProvider settingsStoreProvider, T target) where T : class
-            => Decorate<T>(new SettingsInterceptor(settingsStoreProvider), target);
 
         public static T Decorate<T>(ISettingsStore settingsStore, T target) where T : class
             => Decorate<T>(new SettingsInterceptor(settingsStore), target);
