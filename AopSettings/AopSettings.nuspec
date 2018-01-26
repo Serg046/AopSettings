@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <metadata>
+        <id>AopSettings</id>
+        <version>$version$</version>
+        <title>AopSettings</title>
+        <authors>Serg046</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Castle.DynamicProxy based library that provides a way to create application settings using AOP style.</description>
+        <projectUrl>https://github.com/Serg046/AopSettings</projectUrl>
+        <dependencies>
+            <dependency id="Castle.Core" version="4.0.0"/>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="bin\$Configuration$\AopSettings.dll" target="lib" />
+        <file src="bin\$Configuration$\AopSettings.pdb" target="lib" />
+    </files>
+</package>

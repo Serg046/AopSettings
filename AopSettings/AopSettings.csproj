@@ -53,6 +53,7 @@
     <Compile Include="SettingsInterceptor.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="AopSettings.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
