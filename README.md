@@ -1,6 +1,7 @@
 # AopSettings
 
-[![Build status](https://ci.appveyor.com/api/projects/status/owvt12r5l2vs4hfs?svg=true)](https://ci.appveyor.com/project/Serg046/aopinpc) [![NuGet version](https://badge.fury.io/nu/AopSettings.svg)](https://badge.fury.io/nu/AopSettings)
+[![Build status](https://ci.appveyor.com/api/projects/status/uf89ha4abth3pi52?svg=true)](https://ci.appveyor.com/project/Serg046/aopsettings)
+ [![NuGet version](https://badge.fury.io/nu/AopSettings.svg)](https://badge.fury.io/nu/AopSettings)
 
 
 Castle.DynamicProxy based library that provides a way to create application settings using AOP style.
