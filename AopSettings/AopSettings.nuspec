@@ -9,7 +9,7 @@
         <description>Castle.DynamicProxy based library that provides a way to create application settings using AOP style.</description>
         <projectUrl>https://github.com/Serg046/AopSettings</projectUrl>
         <dependencies>
-            <dependency id="Castle.Core" version="5.0.0"/>
+            <dependency id="Castle.Core" version="4.0.0"/>
         </dependencies>
     </metadata>
     <files>
