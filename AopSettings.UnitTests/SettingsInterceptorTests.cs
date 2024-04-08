@@ -1,5 +1,4 @@
 ﻿using System.Reflection;
-using Castle.DynamicProxy;
 using Moq;
 using Xunit;
 
@@ -8,13 +7,13 @@ namespace AopSettings.UnitTests
     public class SettingsInterceptorTests
     {
         private readonly Mock<ISettingsStore> _settingsStoreMock;
-        private readonly Mock<IInvocation> _invocationMock;
+        private readonly Mock<Castle.DynamicProxy.IInvocation> _invocationMock;
         private readonly SettingsInterceptor _inteceptor;
 
         public SettingsInterceptorTests()
         {
             _settingsStoreMock = new Mock<ISettingsStore>();
-            _invocationMock = new Mock<IInvocation>();
+            _invocationMock = new Mock<Castle.DynamicProxy.IInvocation>();
             _invocationMock.SetupGet(invocation => invocation.TargetType).Returns(GetType());
             _inteceptor = new SettingsInterceptor(_settingsStoreMock.Object);
         }
